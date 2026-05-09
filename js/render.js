@@ -48,7 +48,7 @@ function renderizarPergunta(pergunta) {
 
 export function renderizarQuestoes() {
 
-  document.getElementById("provaTitulo").innerHTML = "Servicenow - " + state.provaAtual.nome;
+  document.getElementById("provaTitulo").innerHTML = state.provaAtual.nome;
 
   const questoesDiv = document.getElementById("questoes");
 
