@@ -1,0 +1,117 @@
+{
+    "nome": "Prova HTML",
+    "questoes": [
+        {
+            "tipo": "single",
+            "fonte": "W3C",
+            "categoria": "HTML",
+            "pergunta": {
+                "texto": "Qual tag cria um link?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "div"
+                },
+                {
+                    "b": "a"
+                },
+                {
+                    "c": "span"
+                },
+                {
+                    "d": "img"
+                }
+            ],
+            "respostas": [
+                "b"
+            ]
+        },
+        {
+            "tipo": "multiple",
+            "fonte": "MDN",
+            "categoria": "CSS",
+            "pergunta": {
+                "texto": "Quais são seletores válidos?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": ".classe"
+                },
+                {
+                    "b": "#id"
+                },
+                {
+                    "c": "@media"
+                },
+                {
+                    "d": "font-size"
+                }
+            ],
+            "respostas": [
+                "a",
+                "b"
+            ]
+        },
+        {
+            "tipo": "drag_and_drop",
+            "fonte": "JavaScript Info",
+            "categoria": "JS",
+            "pergunta": {
+                "texto": "Associe os métodos",
+                "imagem": null
+            },
+            "pergunta_opcoes": [
+                {
+                    "a": "push"
+                },
+                {
+                    "b": "pop"
+                },
+                {
+                    "c": "shift"
+                },
+                {
+                    "d": "shift"
+                },
+                {
+                    "e": "shift"
+                }
+            ],
+            "opcoes": [
+                {
+                    "a": "Remove do início"
+                },
+                {
+                    "b": "Remove do final"
+                },
+                {
+                    "c": "Adiciona ao final"
+                }
+            ],
+            "respostas": {
+                "a": "c",
+                "b": "b",
+                "c": "a"
+            }
+        },
+        {
+            "tipo": "blank",
+            "fonte": "W3C",
+            "categoria": "HTML",
+            "pergunta": {
+                "texto": "A tag __ cria um link",
+                "imagem": "imagem_1.png"
+            },
+            "opcoes": [
+                {
+                    "a": "a"
+                }
+            ],
+            "respostas": [
+                "a"
+            ]
+        }
+    ]
+}

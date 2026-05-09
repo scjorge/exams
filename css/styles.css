@@ -1,0 +1,43 @@
+body {
+  background: #f5f5f5;
+}
+
+.pergunta-imagem {
+
+  max-width: 100%;
+
+  max-height: 350px;
+
+  object-fit: contain;
+}
+
+.correta {
+  border-left: 6px solid #198754;
+}
+
+.errada {
+  border-left: 6px solid #dc3545;
+}
+
+.revisao {
+  border-top: 4px solid #ffc107;
+}
+
+.dropzone {
+  min-height: 60px;
+  border: 2px dashed #999;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.draggable-item {
+  cursor: grab;
+}
+
+.pagination-wrap {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
