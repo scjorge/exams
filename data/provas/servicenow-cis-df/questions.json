@@ -2172,7 +2172,7 @@
             ]
         },
         {
-            "tipo": "multiple",
+            "tipo": "single",
             "fonte": "examtopics",
             "categoria": "Configuration",
             "subcategoria": "CI Class Manager",
