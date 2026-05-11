@@ -5,10 +5,7 @@ import { atualizarStatus } from "./status.js";
 window.corrigirQuestao =
   function (id) {
 
-    const questao =
-      state.provaAtual.questoes.find(
-        q => q.id === id
-      );
+    const questao = state.provaAtual.questoes.find(q => q.id === id);
 
     let correta = false;
 
@@ -73,15 +70,9 @@ window.corrigirQuestao =
     // DRAG DROP
     // ======================================
 
-    if (
-      questao.tipo ===
-      "drag_and_drop"
-    ) {
+    if (questao.tipo === "drag_and_drop") {
 
-      const zones =
-        document.querySelectorAll(
-          `#resposta-${id} .dropzone`
-        );
+      const zones = document.querySelectorAll(`#resposta-${id} .dropzone`);
 
       respostaUsuario = {};
 
@@ -107,10 +98,7 @@ window.corrigirQuestao =
               answer
           );
 
-        if (
-          esperado !== selected
-        ) {
-
+        if (esperado !== selected) {
           correta = false;
         }
       });
@@ -252,10 +240,7 @@ window.revelarRespostaCorreta =
     // SINGLE / MULTIPLE
     // ======================================
 
-    if (
-      questao.tipo === "single" ||
-      questao.tipo === "multiple"
-    ) {
+    if (questao.tipo === "single" || questao.tipo === "multiple") {
 
       const inputs =
         document.querySelectorAll(
@@ -316,10 +301,7 @@ window.revelarRespostaCorreta =
     // DRAG DROP
     // ======================================
 
-    if (
-      questao.tipo ===
-      "drag_and_drop"
-    ) {
+    if (questao.tipo === "drag_and_drop") {
 
       const zones =
         document.querySelectorAll(
@@ -328,7 +310,7 @@ window.revelarRespostaCorreta =
 
       let respostaUsuario = {};
 
-      correta = true;
+      //correta = true;
 
       zones.forEach(zone => {
 
@@ -380,7 +362,7 @@ window.revelarRespostaCorreta =
 
         } else {
 
-          correta = false;
+          //correta = false;
 
           zone.classList.add(
             "border-danger",
