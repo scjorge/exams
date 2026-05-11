@@ -345,6 +345,13 @@
                         Ver / Editar JSON
                     </button>
 
+                    <button class="btn-warn" onclick="baixarPacote()">
+                        Baixar pacote
+                    </button>
+
+                    <button class="btn-danger" onclick="limparStorage()">
+                        Limpar Dados
+                    </button>
                 </div>
 
                 <div class="counter">
@@ -464,11 +471,8 @@
     <script>
 
         let bancoQuestoes = [];
-
         let imagens = [];
-
         let imageCounter = 1;
-
         let currentImage = null;
 
         const fontes = [
@@ -532,6 +536,15 @@
 
                 el.appendChild(option);
             });
+        }
+
+        function limparStorage() {
+
+            if (!confirm("Apagar tudo?")) return;
+
+            localStorage.removeItem("geradorQuestoes");
+
+            location.reload();
         }
 
         function addFonte() {
@@ -731,26 +744,67 @@
             }
         });
 
+        function salvarEstado() {
+
+            const dados = {
+                bancoQuestoes,
+                imagens,
+                imageCounter,
+
+                nomeProva:
+                    document.getElementById("nomeProva").value,
+
+                fontes,
+                categorias,
+                subcategorias
+            };
+
+            localStorage.setItem(
+                "geradorQuestoes",
+                JSON.stringify(dados)
+            );
+        }
+
+        function carregarEstado() {
+
+            const dados =
+                localStorage.getItem("geradorQuestoes");
+
+            if (!dados) return;
+
+            const estado = JSON.parse(dados);
+
+            bancoQuestoes =
+                estado.bancoQuestoes || [];
+
+            imagens =
+                estado.imagens || [];
+
+            imageCounter =
+                estado.imageCounter || 1;
+
+            document.getElementById("nomeProva").value =
+                estado.nomeProva || "Minha Prova";
+
+            // restaura arrays globais
+            fontes.push(...(estado.fontes || []));
+            categorias.push(...(estado.categorias || []));
+            subcategorias.push(...(estado.subcategorias || []));
+
+            refreshSelects();
+
+            document.getElementById(
+                "contadorQuestoes"
+            ).innerText = bancoQuestoes.length;
+        }
+
         function salvarQuestao() {
-
-            const tipo =
-                document.getElementById("tipoQuestao").value;
-
-            const fonte =
-                document.getElementById("fonteQuestao").value;
-
-            const categoria =
-                document.getElementById("categoriaQuestao").value;
-
-            const subcategoria =
-                document.getElementById("subcategoriaQuestao").value;
-
-            const perguntaTexto =
-                document.getElementById("textoPergunta").value.trim().replace(/\n/g, "<br>");
-
-            const imagemNome =
-                document.getElementById("nomeImagem").value.trim()
-                || null;
+            const tipo = document.getElementById("tipoQuestao").value;
+            const fonte = document.getElementById("fonteQuestao").value;
+            const categoria = document.getElementById("categoriaQuestao").value;
+            const subcategoria = document.getElementById("subcategoriaQuestao").value;
+            const perguntaTexto = document.getElementById("textoPergunta").value.trim().replace(/\n/g, "<br>");
+            const imagemNome = document.getElementById("nomeImagem").value.trim() || null;
 
             if (tipo === "blank") {
                 blankCleaner()
@@ -799,9 +853,7 @@
                     });
             }
 
-            const respostasTexto =
-                document.getElementById("respostas")
-                    .value.trim();
+            const respostasTexto = document.getElementById("respostas").value.trim();
 
             let respostas;
 
@@ -837,9 +889,7 @@
             };
 
             if (tipo === "drag_and_drop") {
-
-                questao.pergunta_opcoes =
-                    perguntaOpcoes;
+                questao.pergunta_opcoes = perguntaOpcoes;
             }
 
             bancoQuestoes.push(questao);
@@ -861,10 +911,9 @@
 
             limparFormulario();
 
-            document
-                .getElementById("contadorQuestoes")
-                .innerText = bancoQuestoes.length;
+            document.getElementById("contadorQuestoes").innerText = bancoQuestoes.length;
 
+            salvarEstado();
             alert("Questão salva!");
         }
 
@@ -1221,8 +1270,7 @@
                             .value
                     );
 
-                bancoQuestoes =
-                    json.questoes || [];
+                bancoQuestoes = json.questoes || [];
 
                 document
                     .getElementById("nomeProva")
@@ -1236,8 +1284,8 @@
                     .getElementById("contadorQuestoes")
                     .innerText = bancoQuestoes.length;
 
+                salvarEstado();
             } catch (e) {
-
                 alert("JSON inválido");
             }
         }
@@ -1257,6 +1305,7 @@
                 });
         }
 
+        carregarEstado();
         refreshSelects();
         addOpcao();
         updateRespostaUI();
