@@ -611,7 +611,7 @@
             "categoria": "Ingest",
             "subcategoria": "ACC",
             "pergunta": {
-                "texto": "Configuration Management requires an accurate inventory of devices to be  reflected in the CMDB. Which are common use cases for using Agent Client Collector (ACC)? (Choose<br>two.)",
+                "texto": "Configuration Management requires an accurate inventory of devices to be  reflected in the CMDB. Which are common use cases for using Agent Client Collector (ACC)? (Choose two.)",
                 "imagem": null
             },
             "opcoes": [
@@ -1550,7 +1550,7 @@
             "categoria": "CSDM Fundamentals",
             "subcategoria": "",
             "pergunta": {
-                "texto": "A healthcare provider faces a critical incident affecting its patient management system. The provider needs to determine the users impacted to mitigate<br>disruption effectively.<br><br>Which CSDM-related data should they leverage?",
+                "texto": "A healthcare provider faces a critical incident affecting its patient management system. The provider needs to determine the users impacted to mitigate disruption effectively.<br><br>Which CSDM-related data should they leverage?",
                 "imagem": null
             },
             "opcoes": [
@@ -5295,7 +5295,7 @@
             "categoria": "CSDM Fundamentals",
             "subcategoria": "Crawl Walk Run Fly",
             "pergunta": {
-                "texto": "A CMDB Administrator is leveraging CI data as part of an Integrated Risk Management implementation and the Entity Scoping process. The Administrator wants to leverage the CSDM Data Foundations Dashboard playbooks under the Run tab.<br><br>Which CSDM relationships are leveraged using the CSDM playbooks? (Choosetwo.)",
+                "texto": "A CMDB Administrator is leveraging CI data as part of an Integrated Risk Management implementation and the Entity Scoping process. The Administrator wants to leverage the CSDM Data Foundations Dashboard playbooks under the Run tab.<br><br>Which CSDM relationships are leveraged using the CSDM playbooks? (Choose two.)",
                 "imagem": null
             },
             "opcoes": [
