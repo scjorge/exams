@@ -7,7 +7,7 @@
             "categoria": "CSDM Fundamentals",
             "subcategoria": "Service Offerings",
             "pergunta": {
-                "texto": "A CMDB Administrator has built a number of Technology Management Service Offerings (Technical Service Offerings) based on Dynamic CI Groups to bettermaintain group alignment for the member CI.<br><br>Which Groups are synced to CIs from the offering that has a relationship to a Dynamic CI Group? (Choose two.)",
+                "texto": "A CMDB Administrator has built a number of Technology Management Service Offerings (Technical Service Offerings) based on Dynamic CI Groups to better maintain group alignment for the member CI.<br><br>Which Groups are synced to CIs from the offering that has a relationship to a Dynamic CI Group? (Choose two.)",
                 "imagem": null
             },
             "opcoes": [
