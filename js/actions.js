@@ -44,7 +44,7 @@ function resetarProgresso() {
 
     const confirmar =
         confirm(
-            "Resetar progresso?"
+            "Resetar progresso? Isso inclui apagar as questões marcadas para revisão e as respostas salvas."
         );
 
     if (!confirmar)
