@@ -2367,7 +2367,7 @@
             },
             "opcoes": [
                 {
-                    "a": "Use Service Catalog to define the new CI class, as the CI Class Manager is only for servicerelated records and not for hardware CIs"
+                    "a": "Use Service Catalog to define the new CI class, as the CI Class Manager is only for service related records and not for hardware CIs"
                 },
                 {
                     "b": "Edit an existing CI class under CI Class Manager and add new fields specific to the new equipment type"
