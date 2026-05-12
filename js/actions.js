@@ -10,33 +10,14 @@ import {
 // ======================================
 
 export function inicializarActions() {
-
     // RANDOM
-
-    document.getElementById(
-        "btnRandom"
-    ).addEventListener(
-        "click",
-        randomizarQuestoes
-    );
+    document.getElementById("btnRandom").addEventListener("click",randomizarQuestoes);
 
     // RESET
-
-    document.getElementById(
-        "btnReset"
-    ).addEventListener(
-        "click",
-        resetarProgresso
-    );
+    document.getElementById("btnReset").addEventListener("click", resetarProgresso);
 
     // MAPA
-
-    document.getElementById(
-        "btnMapa"
-    ).addEventListener(
-        "click",
-        gerarMapaRespostas
-    );
+    document.getElementById("btnMapa").addEventListener("click",gerarMapaRespostas);
 }
 
 // ======================================
@@ -44,10 +25,11 @@ export function inicializarActions() {
 // ======================================
 
 function randomizarQuestoes() {
+    for (const questao of state.provaAtual.questoes) {
+        questao.opcoes.sort(() => Math.random() - 0.5);
+    }
 
-    state.provaAtual.questoes.sort(
-        () => Math.random() - 0.5
-    );
+    state.provaAtual.questoes.sort(() => Math.random() - 0.5);
 
     state.paginaAtual = 1;
 

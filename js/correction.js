@@ -1,4 +1,4 @@
-import { salvarResultado } from "./storage.js";
+import { salvarResultado, removerResultado } from "./storage.js";
 import { state } from "./state.js";
 import { atualizarStatus } from "./status.js";
 
@@ -124,13 +124,9 @@ window.corrigirQuestao =
     // CARD
     // ======================================
 
-    const card =
-      document.querySelector(
-        `#resposta-${id}`
-      )?.closest(".card");
+    const card = document.querySelector(`#resposta-${id}`)?.closest(".card");
 
     if (card) {
-
       card.classList.remove(
         "correta",
         "errada"
@@ -142,7 +138,9 @@ window.corrigirQuestao =
           : "errada"
       );
     }
+
     atualizarStatus();
+
     setTimeout(() => {
 
       window.revelarRespostaCorreta(
@@ -152,6 +150,29 @@ window.corrigirQuestao =
 
     }, 50);
   };
+
+
+window.removerCorrecaoQuestao = function (botao, questaoId) {
+  const card = botao.closest(".card");
+  const questao = state.provaAtual.questoes.find(q => q.id === questaoId);
+  console.log("aosdcmaiosdcioamsdmciamdciamsd")
+
+  card.classList.remove(
+    "correta",
+    "errada",
+    "parcial"
+  );
+
+  if (questao.tipo === "single" || questao.tipo === "multiple") {
+
+  }
+
+  botao.textContent = "Corrigir";
+
+  ocultarRespostaCorreta(questao, questaoId);
+  removerResultado(questaoId);
+  atualizarStatus();
+}
 
 // ======================================
 // SINGLE
@@ -230,175 +251,171 @@ function mostrarRespostaCorretaMultiple(
 // REVELAR RESPOSTA CORRETA
 // ======================================
 
-window.revelarRespostaCorreta =
-  function revelarRespostaCorreta(
-    questao,
-    id
-  ) {
+window.revelarRespostaCorreta = function revelarRespostaCorreta(questao, id) {
 
-    // ======================================
-    // SINGLE / MULTIPLE
-    // ======================================
+  // ======================================
+  // SINGLE / MULTIPLE
+  // ======================================
 
-    if (questao.tipo === "single" || questao.tipo === "multiple") {
+  if (questao.tipo === "single" || questao.tipo === "multiple") {
 
-      const inputs =
-        document.querySelectorAll(
-          `#resposta-${id} input`
+    const inputs =
+      document.querySelectorAll(
+        `#resposta-${id} input`
+      );
+
+    inputs.forEach(input => {
+
+      const wrapper =
+        input.closest(
+          ".form-check"
         );
 
-      inputs.forEach(input => {
+      const label =
+        wrapper.querySelector(
+          "label"
+        );
 
-        const wrapper =
-          input.closest(
-            ".form-check"
-          );
+      // limpa estilos antigos
 
-        const label =
-          wrapper.querySelector(
-            "label"
-          );
+      wrapper.classList.remove(
+        "bg-success-subtle",
+        "border",
+        "border-success",
+        "rounded",
+        "p-1"
+      );
 
-        // limpa estilos antigos
+      label.classList.remove(
+        "text-success",
+        "fw-bold"
+      );
 
-        wrapper.classList.remove(
+      // correta
+
+      if (
+        questao.respostas.includes(
+          input.value
+        )
+      ) {
+
+        wrapper.classList.add(
           "bg-success-subtle",
           "border",
           "border-success",
           "rounded",
-          "p-1"
         );
 
-        label.classList.remove(
+        label.classList.add(
           "text-success",
           "fw-bold"
         );
+      }
+    });
+  }
 
-        // correta
+  // ======================================
+  // DRAG DROP
+  // ======================================
 
-        if (
-          questao.respostas.includes(
-            input.value
-          )
-        ) {
+  if (questao.tipo === "drag_and_drop") {
 
-          wrapper.classList.add(
-            "bg-success-subtle",
-            "border",
-            "border-success",
-            "rounded",
-          );
+    const zones =
+      document.querySelectorAll(
+        `#resposta-${id} .dropzone`
+      );
 
-          label.classList.add(
-            "text-success",
-            "fw-bold"
-          );
-        }
-      });
-    }
+    let respostaUsuario = {};
 
-    // ======================================
-    // DRAG DROP
-    // ======================================
+    //correta = true;
 
-    if (questao.tipo === "drag_and_drop") {
+    zones.forEach(zone => {
 
-      const zones =
-        document.querySelectorAll(
-          `#resposta-${id} .dropzone`
+      const answer =
+        zone.dataset.answer;
+
+      const selected =
+        zone.dataset.selected || null;
+
+      respostaUsuario[answer] =
+        selected;
+
+      const esperado =
+        Object.keys(
+          questao.respostas
+        ).find(
+          key =>
+            questao.respostas[key] ===
+            answer
         );
 
-      let respostaUsuario = {};
+      // remove feedback antigo
 
-      //correta = true;
+      const feedbackAntigo =
+        zone.querySelector(
+          ".feedback-drop"
+        );
 
-      zones.forEach(zone => {
+      if (feedbackAntigo)
+        feedbackAntigo.remove();
 
-        const answer =
-          zone.dataset.answer;
+      // remove classes antigas
 
-        const selected =
-          zone.dataset.selected || null;
+      zone.classList.remove(
+        "border-success",
+        "border-danger",
+        "bg-success-subtle",
+        "bg-danger-subtle"
+      );
 
-        respostaUsuario[answer] =
-          selected;
+      // correto
 
-        const esperado =
-          Object.keys(
-            questao.respostas
-          ).find(
-            key =>
-              questao.respostas[key] ===
-              answer
-          );
+      if (esperado === selected) {
 
-        // remove feedback antigo
-
-        const feedbackAntigo =
-          zone.querySelector(
-            ".feedback-drop"
-          );
-
-        if (feedbackAntigo)
-          feedbackAntigo.remove();
-
-        // remove classes antigas
-
-        zone.classList.remove(
+        zone.classList.add(
           "border-success",
+          "bg-success-subtle"
+        );
+
+      } else {
+
+        //correta = false;
+
+        zone.classList.add(
           "border-danger",
-          "bg-success-subtle",
           "bg-danger-subtle"
         );
+      }
 
-        // correto
+      // texto correto
 
-        if (esperado === selected) {
+      const pergunta =
+        questao.pergunta_opcoes.find(
+          op =>
+            Object.keys(op)[0] === esperado
+        );
 
-          zone.classList.add(
-            "border-success",
-            "bg-success-subtle"
-          );
+      const texto =
+        pergunta?.[esperado] ||
+        esperado;
 
-        } else {
+      // feedback
 
-          //correta = false;
-
-          zone.classList.add(
-            "border-danger",
-            "bg-danger-subtle"
-          );
-        }
-
-        // texto correto
-
-        const pergunta =
-          questao.pergunta_opcoes.find(
-            op =>
-              Object.keys(op)[0] === esperado
-          );
-
-        const texto =
-          pergunta?.[esperado] ||
-          esperado;
-
-        // feedback
-
-        zone.innerHTML += `
+      zone.innerHTML += `
 
       <div class="feedback-drop
                   mt-2
                   small">
 
         ${esperado === selected
-            ? `
+          ? `
             <span class="text-success">
 
               ✓ Correto
 
             </span>
           `
-            : `
+          : `
             <span class="text-danger">
 
               ✗ Correto:
@@ -406,12 +423,83 @@ window.revelarRespostaCorreta =
 
             </span>
           `
-          }
+        }
 
       </div>
     `;
-      });
-    }
-  };
+    });
+  }
+};
 
 
+
+// ======================================
+// OCULTAR RESPOSTA CORRETA
+// ======================================
+
+window.ocultarRespostaCorreta = function ocultarRespostaCorreta(questao, id) {
+
+  // ======================================
+  // SINGLE / MULTIPLE
+  // ======================================
+
+  if (questao.tipo === "single" || questao.tipo === "multiple") {
+
+    const inputs = document.querySelectorAll(`#resposta-${id} input`);
+
+    inputs.forEach(input => {
+      const wrapper = input.closest(".form-check");
+      const label = wrapper.querySelector("label");
+      input.checked = false;
+
+      wrapper.classList.remove(
+        "bg-success-subtle",
+        "border",
+        "border-success",
+        "rounded",
+        "p-1"
+      );
+
+      label.classList.remove(
+        "text-success",
+        "fw-bold"
+      );
+    });
+  }
+
+  // ======================================
+  // DRAG DROP
+  // ======================================
+
+  if (questao.tipo === "drag_and_drop") {
+
+    const zones = document.querySelectorAll(`#resposta-${id} .dropzone`);
+
+    zones.forEach(zone => {
+
+      // remove seleção
+      delete zone.dataset.selected;
+
+      // remove feedback
+      const feedback = zone.querySelector(".feedback-drop");
+
+      if (feedback)
+        feedback.remove();
+
+      // remove classes
+      zone.classList.remove(
+        "border-success",
+        "border-danger",
+        "bg-success-subtle",
+        "bg-danger-subtle"
+      );
+
+      // limpa conteúdo dropado
+      zone.innerHTML = "";
+    });
+
+    // volta itens para origem
+    const container = document.querySelector(`#resposta-${id}`);
+    ativarDragDrop(container);
+  }
+};

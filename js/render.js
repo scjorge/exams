@@ -127,13 +127,13 @@ export function renderizarQuestoes() {
           </span>
 
           ${questao.subcategoria
-            ? `
+        ? `
               <span class="badge bg-info text-dark">
                 ${questao.subcategoria}
               </span>
             `
-            : ""
-          }
+        : ""
+      }
 
         </div>
 
@@ -158,12 +158,15 @@ export function renderizarQuestoes() {
 
               ${questao.tipo !== "blank"
           ? `
-                  <button class="btn btn-success"
-                          onclick="corrigirQuestao('${questao.id}')">
+            <button class="btn btn-success btn-corrigir"
+                    data-id="${questao.id}"
+                    onclick="toggleCorrecao(this, '${questao.id}')">
 
-                    Corrigir
+              ${resultado?.status
+            ? "Remover Correção"
+            : "Corrigir"}
 
-                  </button>
+            </button>
                 `
           : ""
         }
@@ -414,3 +417,17 @@ function renderizarTipo(
     ativarDragDrop(container);
   }
 }
+
+window.toggleCorrecao = function (botao, questaoId) {
+  const card = botao.closest(".card");
+
+  // já corrigida → remover correção
+  if (card.classList.contains("correta") || card.classList.contains("errada")) {
+    removerCorrecaoQuestao(botao, questaoId);
+    return;
+  } else {
+    corrigirQuestao(questaoId);
+  }
+
+  botao.textContent = "Remover Correção";
+};
