@@ -957,7 +957,7 @@
                     "b": "Stale, Orphan, Duplicate"
                 },
                 {
-                    "c": "Stale, Orphan, Duplicate"
+                    "c": "Certification Filter, Certification Template, Audit"
                 },
                 {
                     "d": "Technical Service Offerings, Dynamic CI Groups, CMDB Groups"
