@@ -163,7 +163,6 @@ function gerarMapaRespostas() {
         )
 
         .forEach((resp, i) => {
-            console.log(resp);
 
             modalMapaBody.innerHTML += `
 

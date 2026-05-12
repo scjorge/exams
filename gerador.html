@@ -745,31 +745,21 @@
         });
 
         function salvarEstado() {
-
             const dados = {
                 bancoQuestoes,
                 imagens,
                 imageCounter,
-
-                nomeProva:
-                    document.getElementById("nomeProva").value,
-
+                nomeProva: document.getElementById("nomeProva").value,
                 fontes,
                 categorias,
                 subcategorias
             };
 
-            localStorage.setItem(
-                "geradorQuestoes",
-                JSON.stringify(dados)
-            );
+            localStorage.setItem("geradorQuestoes", JSON.stringify(dados));
         }
 
         function carregarEstado() {
-
-            const dados =
-                localStorage.getItem("geradorQuestoes");
-
+            const dados = localStorage.getItem("geradorQuestoes");
             if (!dados) return;
 
             const estado = JSON.parse(dados);
@@ -783,8 +773,7 @@
             imageCounter =
                 estado.imageCounter || 1;
 
-            document.getElementById("nomeProva").value =
-                estado.nomeProva || "Minha Prova";
+            document.getElementById("nomeProva").value = estado.nomeProva || "Minha Prova";
 
             // restaura arrays globais
             fontes.push(...(estado.fontes || []));

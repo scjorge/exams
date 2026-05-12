@@ -155,7 +155,6 @@ window.corrigirQuestao =
 window.removerCorrecaoQuestao = function (botao, questaoId) {
   const card = botao.closest(".card");
   const questao = state.provaAtual.questoes.find(q => q.id === questaoId);
-  console.log("aosdcmaiosdcioamsdmciamdciamsd")
 
   card.classList.remove(
     "correta",

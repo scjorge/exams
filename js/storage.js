@@ -15,11 +15,9 @@ export function getResultado(id) {
   }
 }
 
-export function salvarResultado(id, data) {
-  console.log("Salvando resultado", id, data);
 
-  const atual =
-    getResultado(id) || {};
+export function salvarResultado(id, data) {
+  const atual = getResultado(id) || {};
 
   const atualizado = {
 
@@ -37,18 +35,14 @@ export function removerResultado(id) {
   localStorage.removeItem(`resultado_${id}`);
 }
 
+
 export function toggleRevisao(id) {
 
-  const resultado =
-    getResultado(id) || {};
+  const resultado = getResultado(id) || {};
 
-  resultado.revisao =
-    !resultado.revisao;
+  resultado.revisao = !resultado.revisao;
 
-  localStorage.setItem(
-    `resultado_${id}`,
-    JSON.stringify(resultado)
-  );
+  localStorage.setItem(`resultado_${id}`, JSON.stringify(resultado));
 
   return resultado.revisao;
 }

@@ -1,15 +1,10 @@
 export async function carregarProvas() {
 
     // lista arquivos
-
-    const response =
-        await fetch("./data/index.json");
-
-    const arquivos =
-        await response.json();
+    const response = await fetch("./data/index.json");
+    const arquivos = await response.json();
 
     // carrega todos jsons
-
     const provas =
         await Promise.all(
             arquivos.map(async arquivo => {
@@ -21,17 +16,11 @@ export async function carregarProvas() {
         );
 
     // gerar ids
-
     provas.forEach(prova => {
         prova.questoes =
             prova.questoes.map((q, i) => ({
-
                 ...q,
-
-                id: `${prova.nome}_${i}`
-                    .replace(/\s+/g, "_")
-                    .replace(/[^\w]/g, "")
-
+                id: `${prova.nome}_${i}`.replace(/\s+/g, "_").replace(/[^\w]/g, "")
             }));
     });
 
