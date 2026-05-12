@@ -162,10 +162,6 @@ window.removerCorrecaoQuestao = function (botao, questaoId) {
     "parcial"
   );
 
-  if (questao.tipo === "single" || questao.tipo === "multiple") {
-
-  }
-
   botao.textContent = "Corrigir";
 
   ocultarRespostaCorreta(questao, questaoId);

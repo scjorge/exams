@@ -32,7 +32,17 @@ export function salvarResultado(id, data) {
 
 
 export function removerResultado(id) {
-  localStorage.removeItem(`resultado_${id}`);
+  const questao = localStorage.getItem(`resultado_${id}`);
+  if (!questao) {
+    return;
+  }
+
+  const data = JSON.parse(questao);
+  if (data.revisao) {
+    localStorage.setItem(`resultado_${id}`, JSON.stringify({revisao: true}));
+  } else {
+    localStorage.removeItem(`resultado_${id}`);
+  }
 }
 
 
