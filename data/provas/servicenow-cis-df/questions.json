@@ -2876,7 +2876,7 @@
             "categoria": "Configuration",
             "subcategoria": "",
             "pergunta": {
-                "texto": "An organization utilizes multiple data sources to update its CMDB, each assigned a different priority level. A high-priority data source is scheduled to update server records weekly. However, due to an integration issue, the highpriority data source stops updating the records.<br><br>Which configuration can be used to allow a lower-priority data source to update records after a specified period of inactivity from the higher-priority source?",
+                "texto": "An organization utilizes multiple data sources to update its CMDB, each assigned a different priority level. A high-priority data source is scheduled to update server records weekly. However, due to an integration issue, the high-priority data source stops updating the records.<br><br>Which configuration can be used to allow a lower-priority data source to update records after a specified period of inactivity from the higher-priority source?",
                 "imagem": null
             },
             "opcoes": [
