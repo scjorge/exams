@@ -4366,7 +4366,7 @@
                     "c": "Enables audits and attestations across CIs"
                 },
                 {
-                    "d": "Allows security team to assess and remediate an incident (Correct Answer)"
+                    "d": "Allows security team to assess and remediate an incident"
                 }
             ],
             "respostas": [
