@@ -1941,7 +1941,7 @@
             "categoria": "Configuration",
             "subcategoria": "",
             "pergunta": {
-                "texto": "Which are business values of CMDB?",
+                "texto": "Which are business values of CMDB? (Choose two.)",
                 "imagem": null
             },
             "opcoes": [
