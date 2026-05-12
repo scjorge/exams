@@ -4597,7 +4597,7 @@
             "categoria": "Configuration",
             "subcategoria": "",
             "pergunta": {
-                "texto": "A CMDB Administrator wants to leverage the CMDB Data FoundationsDashboard.<br><br>What are benefits of using this application?",
+                "texto": "A CMDB Administrator wants to leverage the CMDB Data Foundations Dashboard.<br><br>What are benefits of using this application?",
                 "imagem": null
             },
             "opcoes": [
