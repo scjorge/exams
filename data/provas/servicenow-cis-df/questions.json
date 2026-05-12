@@ -482,7 +482,7 @@
             "categoria": "Configuration",
             "subcategoria": "CI Class Manager",
             "pergunta": {
-                "texto": "The following identification rule for a CI class has been defined:<br><br>Two new CI records are imported into the hardware class of the CMDB:<br><br>CI1: The name of this CI record matches the name of an existing CI record in the CMDB.<br>CI2: The IP address of this CI record matches the IP address of an existing CI record in the CMDB.<br><br>Which is correct based on the identification rule and the imported CI records?",
+                "texto": "The following identification rule for a CI class has been defined:<br><br>Two new CI records are imported into the hardware class of the CMDB:<br><br>CI1: The name of this CI record matches the name of an existing CI record in the CMDB.<br><br>CI2: The IP address of this CI record matches the IP address of an existing CI record in the CMDB.<br><br>Which is correct based on the identification rule and the imported CI records?",
                 "imagem": "imagem_2.png"
             },
             "opcoes": [
@@ -571,7 +571,7 @@
                     "c": "Workflow Studio"
                 },
                 {
-                    "d": "ervice Mapping"
+                    "d": "Service Mapping"
                 }
             ],
             "respostas": [
