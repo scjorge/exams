@@ -944,6 +944,93 @@
             "tipo": "single",
             "fonte": "examtopics",
             "categoria": "Govern",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which CSDM domain represents deployed service instances and their related, discoverable, components?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Service Consumption"
+                },
+                {
+                    "b": "Service Delivery"
+                },
+                {
+                    "c": "Ideation & Strategy"
+                },
+                {
+                    "d": "Build & Integration"
+                },
+                {
+                    "d": "Design & Planning"
+                }
+            ],
+            "respostas": [
+                "b"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "Govern",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Business Services, Technology Management Services, Business Service Offerings, and Technology Management Offerings can be created using forms and lists or in a more streamlined manner using which of the following?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Application Service Wizard"
+                },
+                {
+                    "b": "Service Mapping"
+                },
+                {
+                    "c": "CMDB Workspace"
+                },
+                {
+                    "d": "Service Builder"
+                },
+                {
+                    "d": "CI Class Manager"
+                }
+            ],
+            "respostas": [
+                "d"
+            ]
+        },
+        {
+            "tipo": "multiple",
+            "fonte": "examtopics",
+            "categoria": "Govern",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which of the following are operational Configuration Items (CIs) that can be selected and populated in the Configuration item field on an Incident or Change Request record?(Choose 2)",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Dynamic CI Group"
+                },
+                {
+                    "b": "Application Service"
+                },
+                {
+                    "c": "Installed Software"
+                },
+                {
+                    "d": "Business Application"
+                }
+            ],
+            "respostas": [
+                "a", "b"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "Govern",
             "subcategoria": "CMDB Health",
             "pergunta": {
                 "texto": "The CMDB Administrator group aims to display meaningful results on the CMDB Health Dashboard Compliance Scorecard for server records that are not on the latest patch.<br><br>What must be configured to achieve this goal?",
@@ -964,7 +1051,7 @@
                 }
             ],
             "respostas": [
-                "c"
+                "a"
             ]
         },
         {
@@ -1550,6 +1637,150 @@
             "categoria": "CSDM Fundamentals",
             "subcategoria": "",
             "pergunta": {
+                "texto": "Which CSDM domain is Customer Service Management part of?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Service Delivery"
+                },
+                {
+                    "b": "Service Consumption"
+                },
+                {
+                    "c": "Ideation & Strategy"
+                },
+                {
+                    "d": "Build & Integration"
+                },
+                {
+                    "e": "Design & Planning"
+                }
+            ],
+            "respostas": [
+                "b"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which is a service instance type that is a logical representation of a deployed application stack and its dependencies?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Application [cmdb_ci_app]"
+                },
+                {
+                    "b": "Business Application [cmdb_ci_business_app]"
+                },
+                {
+                    "c": "Application Service [cmdb_ci_service_auto]"
+                },
+                {
+                    "d": "Technology Management Service [cmdb_ci_service_technical]"
+                }
+            ],
+            "respostas": [
+                "c"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which feature can be used to relate an application service/service instance with a technology management offering, business service offering, and/or a business application?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Hardware status"
+                },
+                {
+                    "b": "Life cycle stage and stage status"
+                },
+                {
+                    "c": "Install status"
+                },
+                {
+                    "d": "Operational status"
+                }
+            ],
+            "respostas": [
+                "b"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which feature can be used to relate an application service/service instance with a technology management offering, business service offering, and/or a business application?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Service Builder"
+                },
+                {
+                    "b": "CMDB Workspace"
+                },
+                {
+                    "c": "Application Service Wizard"
+                },
+                {
+                    "d": "IntegrationHub ETL"
+                },
+                {
+                    "d": "CI Class Manager"
+                }
+            ],
+            "respostas": [
+                "d"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Which of the following provides a unified workspace that allows owners to holistically view and collectively manage their portfolios, services, offerings, and products through the full lifecycle?",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "CI Class Manager"
+                },
+                {
+                    "b": "Digital Portfolio Management"
+                },
+                {
+                    "c": "Service Operations Workspace"
+                },
+                {
+                    "d": "CMDB Workspace"
+                },
+                {
+                    "d": "Service Builder"
+                }
+            ],
+            "respostas": [
+                "b"
+            ]
+        },
+        {
+            "tipo": "single",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
                 "texto": "A healthcare provider faces a critical incident affecting its patient management system. The provider needs to determine the users impacted to mitigate disruption effectively.<br><br>Which CSDM-related data should they leverage?",
                 "imagem": null
             },
@@ -1569,6 +1800,36 @@
             ],
             "respostas": [
                 "c"
+            ]
+        },
+        {
+            "tipo": "multiple",
+            "fonte": "examtopics",
+            "categoria": "Insight",
+            "subcategoria": "Unified Map",
+            "pergunta": {
+                "texto": "What are the 3 pillars to focus on to achieve a successful data foundation? (Choose 3)",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Correctness"
+                },
+                {
+                    "b": "Ingest"
+                },
+                {
+                    "c": "Insight"
+                },
+                {
+                    "d": "Govern"
+                },
+                {
+                    "e": "Completeness"
+                }
+            ],
+            "respostas": [
+                "b", "c", "d"
             ]
         },
         {
@@ -1651,6 +1912,33 @@
                 "b"
             ]
         },
+       {
+            "tipo": "multiple",
+            "fonte": "examtopics",
+            "categoria": "CSDM Fundamentals",
+            "subcategoria": "",
+            "pergunta": {
+                "texto": "Aligning to the Common Service Data Model (CSDM) allows for auto population of the assignment group field on new incident and change request records. Which of the following are true when creating a new Incident or Change Request in ServiceNow?( Choose 2)",
+                "imagem": null
+            },
+            "opcoes": [
+                {
+                    "a": "Support group on the selected CI auto-populates the assignment group field on the incident form."
+                },
+                {
+                    "b": "Managed by group on the selected CI auto-populates the assignment group field on the incident form."
+                },
+                {
+                    "c": "Approval group on the selected CI auto-populates the assignment group field on the change request form."
+                },
+                {
+                    "d": "Change group on the selected CI auto-populates the assignment group field on the change request form."
+                }
+            ],
+            "respostas": [
+                "a", "d"
+            ]
+        },
         {
             "tipo": "single",
             "fonte": "examtopics",
@@ -1678,7 +1966,7 @@
                 }
             ],
             "respostas": [
-                "b"
+                "c"
             ]
         },
         {
