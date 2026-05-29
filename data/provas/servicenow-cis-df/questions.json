@@ -684,7 +684,7 @@
                 "a": "b",
                 "b": "a",
                 "c": "d",
-                "e": "c"
+                "d": "c"
             },
             "pergunta_opcoes": [
                 {
@@ -1881,7 +1881,7 @@
             ],
             "respostas": [
                 "a",
-                "b"
+                "c"
             ]
         },
         {
@@ -3294,7 +3294,7 @@
             "categoria": "Govern",
             "subcategoria": "Deduplication",
             "pergunta": {
-                "texto": "A CMDB Administrator needs to prevent duplicate CI creation from import sets that load data into the CMDB from vendor shipment files containing CIinformation.<br><br>How can the Administrator do this?",
+                "texto": "A CMDB Administrator needs to prevent duplicate CI creation from import sets that load data into the CMDB from vendor shipment files containing CI information.<br><br>How can the Administrator do this?",
                 "imagem": null
             },
             "opcoes": [
@@ -4385,7 +4385,7 @@
                 }
             ],
             "respostas": [
-                "d"
+                "b"
             ]
         },
         {
@@ -4796,8 +4796,8 @@
                 }
             ],
             "respostas": [
-                "b",
-                "c"
+                "d",
+                "b"
             ]
         },
         {
