@@ -7,46 +7,100 @@ import { atualizarStatus } from "./status.js";
 
 
 // ======================================
-// RENDER PERGUNTA
+// PALAVRAS ÚNICAS
 // ======================================
+
+let palavrasUnicas = new Set();
+
+function gerarIndicePalavras() {
+  const contador = {};
+
+  state.provaAtual.questoes.forEach(questao => {
+
+    let texto = "";
+
+    if (typeof questao.pergunta === "string") {
+      texto = questao.pergunta;
+    } else {
+      texto = questao.pergunta?.texto || "";
+    }
+
+    texto
+      .toLowerCase()
+      .replace(/[^\w\s]/g, " ")
+      .split(/\s+/)
+      .forEach(palavra => {
+
+        palavra = palavra.trim();
+
+        if (!palavra) return;
+
+        // ignora palavras muito curtas
+        if (palavra.length < 2) return;
+
+        contador[palavra] = (contador[palavra] || 0) + 1;
+      });
+  });
+
+  palavrasUnicas = new Set(
+    Object.keys(contador)
+      .filter(palavra => (contador[palavra] <= 2))
+  );
+
+}
+
+
+function destacarPalavrasUnicas(texto) {
+  return texto.replace(
+    /\b[\w]+\b/g,
+    palavra => {
+      if (palavrasUnicas.has(palavra.toLowerCase())) {
+        return `
+          <span class="text-danger fw-bold">
+            ${palavra}
+          </span>
+        `;
+      }
+
+      return palavra;
+    }
+  );
+}
+
 
 function renderizarPergunta(pergunta) {
   if (typeof pergunta === "string") {
-    return `
-      ${pergunta}
-    `;
+    return destacarPalavrasUnicas(pergunta);
   }
 
-  // formato novo
-
   return `
-
     <div class="pergunta-wrap">
 
       <div class="pergunta-texto">
-
-        ${pergunta.texto || ""}
+        ${destacarPalavrasUnicas(pergunta.texto || "")}
 
       </div>
 
       ${pergunta.imagem
-      ? `
+        ? `
           <div class="mt-3">
-
             <img
               src="${state.provaAtual.mediaURLBase}${pergunta.imagem}"
               class="img-fluid rounded border shadow-sm pergunta-imagem">
-
           </div>
         `
-      : ""
-    }
+        : ""
+      }
 
     </div>
   `;
 }
 
+// ======================================
+// RENDER PERGUNTA
+// ======================================
 export function renderizarQuestoes() {
+  gerarIndicePalavras();
   document.getElementById("provaTitulo").innerHTML = state.provaAtual.nome;
 
   const questoesDiv = document.getElementById("questoes");
