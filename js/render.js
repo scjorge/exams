@@ -36,15 +36,14 @@ function gerarIndicePalavras() {
         if (!palavra) return;
 
         // ignora palavras muito curtas
-        if (palavra.length < 2) return;
+        if (palavra.length < 3) return;
 
         contador[palavra] = (contador[palavra] || 0) + 1;
       });
   });
 
   palavrasUnicas = new Set(
-    Object.keys(contador)
-      .filter(palavra => (contador[palavra] <= 2))
+    Object.keys(contador).filter(palavra => (contador[palavra] == 1))
   );
 
 }
@@ -267,10 +266,7 @@ export function renderizarQuestoes() {
 
 function renderizarPaginacao() {
 
-  const paginacao =
-    document.getElementById(
-      "paginacao"
-    );
+  const paginacao = document.getElementById("paginacao");
 
   paginacao.innerHTML = "";
 
@@ -297,9 +293,11 @@ function renderizarPaginacao() {
       state.paginaAtual = i;
 
       renderizarQuestoes();
+      window.scrollTo(0, 0);
     };
 
     paginacao.appendChild(btn);
+    
   }
 }
 
