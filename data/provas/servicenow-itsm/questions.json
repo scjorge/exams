@@ -343,37 +343,6 @@
             "categoria": "",
             "subcategoria": "",
             "pergunta": {
-                "texto": "What tools are available to the assignee to help resolve an Incident? (Choose two.)",
-                "imagem": null
-            },
-            "opcoes": [
-                {
-                    "a": "Resolutions from similar incidents"
-                },
-                {
-                    "b": "Enterprise CMDB Dashboard"
-                },
-                {
-                    "c": "CI Class Manager"
-                },
-                {
-                    "d": "Incident Overview Dashboard"
-                },
-                {
-                    "e": "Known Errors"
-                }
-            ],
-            "respostas": [
-                "a",
-                "e"
-            ]
-        },
-        {
-            "tipo": "multiple",
-            "fonte": "examtopics",
-            "categoria": "",
-            "subcategoria": "",
-            "pergunta": {
                 "texto": "In the CAB workbench, what are some ways the CAB manager can identify the Change requests to be added to a particular meeting agenda? (Choose two.)",
                 "imagem": null
             },
