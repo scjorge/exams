@@ -1043,7 +1043,7 @@
             "categoria": "",
             "subcategoria": "",
             "pergunta": {
-                "texto": "A change user complains that with the new Preapproved tab, they have to search through many options to find the Reboot Windows Server change. Since they use this change several times per day, it is inconvenient.<br><br>What should you suggest to make it easier for the change user?",
+                "texto": "A change user complains that with the new Pre approved tab, they have to search through many options to find the Reboot Windows Server change. Since they use this change several times per day, it is inconvenient.<br><br>What should you suggest to make it easier for the change user?",
                 "imagem": null
             },
             "opcoes": [
