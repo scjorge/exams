@@ -10,9 +10,10 @@ import { atualizarStatus } from "./status.js";
 // PALAVRAS ÚNICAS
 // ======================================
 
-let palavrasUnicas = new Set();
+let termosUnicos = new Set();
 
 function gerarIndicePalavras() {
+
   const contador = {};
 
   state.provaAtual.questoes.forEach(questao => {
@@ -25,45 +26,112 @@ function gerarIndicePalavras() {
       texto = questao.pergunta?.texto || "";
     }
 
-    texto
+    const palavras = texto
       .toLowerCase()
       .replace(/[^\w\s]/g, " ")
       .split(/\s+/)
-      .forEach(palavra => {
+      .filter(p => p.length >= 2);
 
-        palavra = palavra.trim();
+    // unigramas
+    palavras.forEach(p => {
+      contador[p] = (contador[p] || 0) + 1;
+    });
 
-        if (!palavra) return;
+    // bigramas
+    for (let i = 0; i < palavras.length - 1; i++) {
+      const termo = palavras[i] + " " + palavras[i + 1];
+      contador[termo] = (contador[termo] || 0) + 1;
+    }
 
-        // ignora palavras muito curtas
-        if (palavra.length < 3) return;
+    // trigramas
+    for (let i = 0; i < palavras.length - 2; i++) {
+      const termo = palavras[i] + " " + palavras[i + 1] + " " + palavras[i + 2];
+      contador[termo] = (contador[termo] || 0) + 1;
+    }
 
-        contador[palavra] = (contador[palavra] || 0) + 1;
-      });
   });
 
-  palavrasUnicas = new Set(
-    Object.keys(contador).filter(palavra => (contador[palavra] == 1))
+  termosUnicos = new Set(
+    Object.keys(contador)
+      .filter(k => contador[k] === 1)
   );
-
 }
 
-
 function destacarPalavrasUnicas(texto) {
-  return texto.replace(
-    /\b[\w]+\b/g,
-    palavra => {
-      if (palavrasUnicas.has(palavra.toLowerCase())) {
-        return `
-          <span class="text-danger fw-bold">
-            ${palavra}
-          </span>
-        `;
-      }
 
-      return palavra;
+  const palavras = texto.split(/\s+/);
+
+  let resultado = [];
+  let i = 0;
+
+  while (i < palavras.length) {
+
+    // tenta trigrama
+    if (i + 2 < palavras.length) {
+
+      const trig =
+        (
+          palavras[i] + " " +
+          palavras[i + 1] + " " +
+          palavras[i + 2]
+        ).toLowerCase();
+
+      if (termosUnicos.has(trig)) {
+
+        resultado.push(
+          `<span class="text-danger fw-bold">
+            ${palavras[i]} ${palavras[i + 1]} ${palavras[i + 2]}
+          </span>`
+        );
+
+        i += 3;
+        continue;
+      }
     }
-  );
+
+    // tenta bigrama
+    if (i + 1 < palavras.length) {
+
+      const big =
+        (
+          palavras[i] + " " +
+          palavras[i + 1]
+        ).toLowerCase();
+
+      if (termosUnicos.has(big)) {
+
+        resultado.push(
+          `<span class="text-danger fw-bold">
+            ${palavras[i]} ${palavras[i + 1]}
+          </span>`
+        );
+
+        i += 2;
+        continue;
+      }
+    }
+
+    // tenta unigrama
+    const uni =
+      palavras[i]
+        .toLowerCase()
+        .replace(/[^\w]/g, "");
+
+    if (termosUnicos.has(uni)) {
+
+      resultado.push(
+        `<span class="text-danger fw-bold">
+          ${palavras[i]}
+        </span>`
+      );
+    } else {
+      resultado.push(palavras[i]);
+    }
+
+    i++;
+  }
+
+  return resultado.join(" ");
 }
 
 
