@@ -1,9 +1,7 @@
-import { state }
-    from "./state.js";
+import { state } from "./state.js";
 
-import {
-    renderizarQuestoes
-} from "./render.js";
+import { renderizarQuestoes, extrairQuestoesComTermosUnicos } from "./render.js";
+
 
 // ======================================
 // RANDOM
@@ -11,13 +9,16 @@ import {
 
 export function inicializarActions() {
     // RANDOM
-    document.getElementById("btnRandom").addEventListener("click",randomizarQuestoes);
+    document.getElementById("btnRandom").addEventListener("click", randomizarQuestoes);
 
     // RESET
     document.getElementById("btnReset").addEventListener("click", resetarProgresso);
 
     // MAPA
-    document.getElementById("btnMapa").addEventListener("click",gerarMapaRespostas);
+    document.getElementById("btnMapa").addEventListener("click", gerarMapaRespostas);
+
+    // MAPA Termos Respostas
+    document.getElementById("btnTermosRespostas").addEventListener("click", gerarMapaTermosRespostas);
 }
 
 // ======================================
@@ -128,12 +129,7 @@ function obterTextoResposta(q) {
 }
 
 function gerarMapaRespostas() {
-
-    const modalMapaBody =
-        document.getElementById(
-            "modalMapaBody"
-        );
-
+    const modalMapaBody = document.getElementById("modalMapaBody");
     modalMapaBody.innerHTML = "";
 
     const mapa = {};
@@ -182,7 +178,7 @@ function gerarMapaRespostas() {
                         <ul class="list-group">
 
                             ${mapa[resp]
-                                .map(p => `
+                    .map(p => `
 
                                     <li class="list-group-item">
 
@@ -191,7 +187,7 @@ function gerarMapaRespostas() {
                                     </li>
 
                                 `)
-                                .join("")}
+                    .join("")}
 
                         </ul>
 
@@ -200,4 +196,135 @@ function gerarMapaRespostas() {
                 </div>
             `;
         });
+}
+
+
+function obterRespostasCorretas(questao) {
+
+    const respostas = [];
+
+    // SINGLE / MULTIPLE / BLANK
+    if (Array.isArray(questao.respostas)) {
+
+        questao.respostas.forEach(key => {
+
+            const opcao = questao.opcoes.find(
+                o => Object.keys(o)[0] === key
+            );
+
+            if (opcao) {
+                respostas.push(
+                    opcao[key]
+                );
+            }
+        });
+    }
+
+    // DRAG & DROP
+    else if (questao.tipo === "drag_and_drop") {
+
+        Object.entries(questao.respostas)
+            .forEach(([origem, destino]) => {
+
+                const origemObj =
+                    questao.pergunta_opcoes.find(
+                        o => Object.keys(o)[0] === origem
+                    );
+
+                const destinoObj =
+                    questao.opcoes.find(
+                        o => Object.keys(o)[0] === destino
+                    );
+
+                if (origemObj && destinoObj) {
+
+                    respostas.push(
+                        `${origemObj[origem]} → ${destinoObj[destino]}`
+                    );
+                }
+            });
+    }
+
+    return respostas;
+}
+
+
+function gerarMapaTermosRespostas() {
+    const questoesComTermosUnicos = extrairQuestoesComTermosUnicos(state.provaAtual);
+    const modalMapaBody = document.getElementById("modalTermoRespostasBody");
+    modalMapaBody.innerHTML = "";
+
+    questoesComTermosUnicos.forEach((q, i) => {
+        const questao = q.pergunta;
+        const respostas = obterRespostasCorretas(questao);
+
+        modalMapaBody.innerHTML += `
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-header">
+
+                <button
+                    class="btn btn-link text-decoration-none w-100 text-start"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#resp${i}">
+
+                    <div class="fw-bold fs-5">
+                        ${q.termoChave}
+                    </div>
+
+                    <small class="text-muted ">
+                        ${questao.tipo}
+                    </small>
+
+                </button>
+
+            </div>
+
+            <div
+                id="resp${i}"
+                class="collapse">
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <div class="text-muted small">
+                            PERGUNTA
+                        </div>
+
+                        <div>
+                            ${questao.pergunta?.texto || ""}
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <div class="text-muted small">
+                            RESPOSTAS
+                        </div>
+
+                        <ul class="list-group mt-2">
+
+                            ${respostas.map(r => `
+                                <li class="list-group-item list-group-item-success">
+                                    ${r}
+                                </li>
+                            `).join("")}
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+    });
+
+
 }

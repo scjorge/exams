@@ -168,6 +168,7 @@ function renderizarPergunta(pergunta) {
 // ======================================
 export function renderizarQuestoes() {
   gerarIndicePalavras();
+
   document.getElementById("provaTitulo").innerHTML = state.provaAtual.nome;
 
   const questoesDiv = document.getElementById("questoes");
@@ -536,6 +537,188 @@ function renderizarTipo(
     ativarDragDrop(container);
   }
 }
+
+export function extrairQuestoesComTermosUnicos(prova) {
+
+  // =====================================
+  // HELPERS
+  // =====================================
+
+  function normalizar(texto) {
+    return texto
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function gerarNGrams(texto, maxN = 3) {
+
+    const palavras = normalizar(texto)
+      .split(" ")
+      .filter(Boolean);
+
+    const termos = new Set();
+
+    for (let n = 1; n <= maxN; n++) {
+
+      for (let i = 0; i <= palavras.length - n; i++) {
+
+        termos.add(
+          palavras
+            .slice(i, i + n)
+            .join(" ")
+        );
+      }
+    }
+
+    return termos;
+  }
+
+  // =====================================
+  // ÍNDICE GLOBAL
+  // TODAS AS ALTERNATIVAS DA PROVA
+  // =====================================
+
+  const contadorGlobal = {};
+
+  prova.questoes.forEach(questao => {
+
+    if (!questao.opcoes) return;
+
+    questao.opcoes.forEach(opcao => {
+
+      const texto =
+        Object.values(opcao)[0];
+
+      const termos =
+        gerarNGrams(texto);
+
+      // conta apenas uma vez por alternativa
+      termos.forEach(termo => {
+
+        contadorGlobal[termo] =
+          (contadorGlobal[termo] || 0) + 1;
+      });
+    });
+
+  });
+
+  // =====================================
+  // PROCESSAR QUESTÕES
+  // =====================================
+
+  const resultado = [];
+
+  prova.questoes.forEach(questao => {
+
+    let respostasCorretasTexto = [];
+
+    // -------------------------------
+    // SINGLE / MULTIPLE / BLANK
+    // -------------------------------
+
+    if (Array.isArray(questao.respostas)) {
+
+      questao.respostas.forEach(respostaKey => {
+
+        const opcao =
+          questao.opcoes.find(
+            o => Object.keys(o)[0] === respostaKey
+          );
+
+        if (opcao) {
+
+          respostasCorretasTexto.push(
+            opcao[respostaKey]
+          );
+        }
+      });
+    }
+
+    // -------------------------------
+    // DRAG DROP
+    // -------------------------------
+
+    else if (
+      questao.tipo === "drag_and_drop"
+    ) {
+
+      Object.entries(
+        questao.respostas
+      ).forEach(([origem, destino]) => {
+
+        const origemObj =
+          questao.pergunta_opcoes.find(
+            o => Object.keys(o)[0] === origem
+          );
+
+        const destinoObj =
+          questao.opcoes.find(
+            o => Object.keys(o)[0] === destino
+          );
+
+        if (origemObj && destinoObj) {
+
+          respostasCorretasTexto.push(
+            `${origemObj[origem]} ${destinoObj[destino]}`
+          );
+        }
+      });
+    }
+
+    if (!respostasCorretasTexto.length)
+      return;
+
+    // =====================================
+    // ENCONTRAR TERMOS EXCLUSIVOS
+    // =====================================
+
+    const termosExclusivos = [];
+
+    respostasCorretasTexto.forEach(texto => {
+
+      const termos =
+        [...gerarNGrams(texto)];
+
+      termos.forEach(termo => {
+
+        if (
+          contadorGlobal[termo] === 1
+        ) {
+
+          termosExclusivos.push(
+            termo
+          );
+        }
+      });
+    });
+
+    if (!termosExclusivos.length)
+      return;
+
+    // =====================================
+    // PRIORIZAR:
+    // 3 palavras > 2 > 1
+    // =====================================
+
+    termosExclusivos.sort((a, b) => {
+      const tamanhoA = a.split(" ").length;
+      const tamanhoB = b.split(" ").length;
+      return tamanhoB - tamanhoA;
+    });
+
+    const perguntaTexto = typeof questao.pergunta === "string" ? questao.pergunta : questao.pergunta?.texto || "";
+    resultado.push({
+      pergunta: questao,
+      resposta: respostasCorretasTexto.join(" | "),
+      termoChave: termosExclusivos[0],
+    });
+
+  });
+
+  return resultado;
+}
+
 
 window.toggleCorrecao = function (botao, questaoId) {
   const card = botao.closest(".card");
