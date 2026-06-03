@@ -44,10 +44,10 @@ function gerarIndicePalavras() {
     }
 
     // trigramas
-    for (let i = 0; i < palavras.length - 2; i++) {
-      const termo = palavras[i] + " " + palavras[i + 1] + " " + palavras[i + 2];
-      contador[termo] = (contador[termo] || 0) + 1;
-    }
+    // for (let i = 0; i < palavras.length - 2; i++) {
+    //   const termo = palavras[i] + " " + palavras[i + 1] + " " + palavras[i + 2];
+    //   contador[termo] = (contador[termo] || 0) + 1;
+    // }
 
   });
 
